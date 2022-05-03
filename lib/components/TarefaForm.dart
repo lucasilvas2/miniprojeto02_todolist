@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-enum Prioridade{baixa, alta, normal}
+enum Prioridade { 
+  baixa, alta, normal
+}
+
+extension ParseToString on Prioridade {
+  String toShortString() {
+    return this.toString().split('.').last;
+  }
+}
+
 class TarefaForm extends StatefulWidget {
-  void Function(String, DateTime, String) onSubmit;
+  void Function(String, DateTime, String, String) onSubmit;
 
   TarefaForm(this.onSubmit);
 
@@ -23,7 +32,7 @@ class _TarefaFormState extends State<TarefaForm> {
       return;
     }
 
-    widget.onSubmit(titulo, _dataSelecionada, comentario);
+    widget.onSubmit(titulo, _dataSelecionada, comentario, prioridadeEscolhida!.toShortString());
   }
 
   _showDatePicker() {
@@ -56,86 +65,44 @@ class _TarefaFormState extends State<TarefaForm> {
         decoration: InputDecoration(labelText: 'Comentário'),
       ),
       Text('Prioridade'),
-      // DropdownButton<String>(
-      //   value: prioridadeEscolhida,
-      //   //icon: const Icon(Icons.arrow_downward),
-      //   //elevation: 16,
-      //   //style: const TextStyle(color: Colors.deepPurple),
-      //   underline: Container(
-      //     height: 2,
-      //     color: Colors.deepPurpleAccent,
-      //   ),
-      //   onChanged: (String? newValue) {
-      //     setState(() {
-      //       prioridadeEscolhida = newValue!;
-      //     });
-      //   },
-      //   items: <String>['Baixa','Normal', 'Alta']
-      //       .map<DropdownMenuItem<String>>((String value) {
-      //     return DropdownMenuItem<String>(
-      //       value: value,
-      //       child: Text(value),
-      //     );
-      //   }).toList(),
-      // ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                ListTile(
-                  title: const Text('Baixa'),
-                  leading: Radio<Prioridade>(
-                    value: Prioridade.baixa,
-                    groupValue: prioridadeEscolhida,
-                    onChanged: (Prioridade? value) {
-                      setState(() {
-                        prioridadeEscolhida = value;
-                      });
-                    },
-                  ),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                ListTile(
-                  title: const Text('Normal'),
-                  leading: Radio<Prioridade>(
-                    value: Prioridade.normal,
-                    groupValue: prioridadeEscolhida,
-                    onChanged: (Prioridade? value) {
-                      setState(() {
-                        prioridadeEscolhida = value;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Row(
-              children: [
-                ListTile(
-                  title: const Text('Alta'),
-                  leading: Radio<Prioridade>(
-                    value: Prioridade.alta,
-                    groupValue: prioridadeEscolhida,
-                    onChanged: (Prioridade? value) {
-                      setState(() {
-                        prioridadeEscolhida = value;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+      ListTile(
+        title: const Text('Baixa'),
+        leading: Radio<Prioridade>(
+          value: Prioridade.baixa,
+          groupValue: prioridadeEscolhida,
+          onChanged: (Prioridade? value) {
+            setState(() {
+              prioridadeEscolhida = value;
+              print(prioridadeEscolhida!.toShortString());
+            });
+          },
+        ),
+      ),
+      ListTile(
+        title: const Text('Normal'),
+        leading: Radio<Prioridade>(
+          value: Prioridade.normal,
+          groupValue: prioridadeEscolhida,
+          onChanged: (Prioridade? value) {
+            setState(() {
+              prioridadeEscolhida = value;
+              print(prioridadeEscolhida);
+            });
+          },
+        ),
+      ),
+      ListTile(
+        title: const Text('Alta'),
+        leading: Radio<Prioridade>(
+          value: Prioridade.alta,
+          groupValue: prioridadeEscolhida,
+          onChanged: (Prioridade? value) {
+            setState(() {
+              prioridadeEscolhida = value;
+              print(prioridadeEscolhida);
+            });
+          },
+        ),
       ),
       Container(
         child: Row(

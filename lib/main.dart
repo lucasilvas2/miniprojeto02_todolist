@@ -35,9 +35,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  _novaTarefa(String titulo, DateTime data_, String comentario) {
+  _novaTarefa(String titulo, DateTime data_, String comentario, String prioridade) {
     Tarefa novaTarefa = Tarefa(
-      id: Random().nextInt(9999).toString(), data_criacao: DateTime.now(), titulo: titulo, data_execucao: data_, prioridade: 'alta', comentario: comentario);
+      id: Random().nextInt(9999).toString(), data_criacao: DateTime.now(), titulo: titulo, data_execucao: data_, prioridade: prioridade, comentario: comentario);
 
     setState(() {
       _tarefas.add(novaTarefa);
