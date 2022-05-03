@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('To Do List'),
       ),
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
             TarefaForm(_novaTarefa),

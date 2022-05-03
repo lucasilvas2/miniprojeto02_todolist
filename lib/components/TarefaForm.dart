@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-enum Prioridade { 
-  baixa, alta, normal
-}
+enum Prioridade { baixa, alta, normal }
 
 extension ParseToString on Prioridade {
   String toShortString() {
@@ -32,7 +30,8 @@ class _TarefaFormState extends State<TarefaForm> {
       return;
     }
 
-    widget.onSubmit(titulo, _dataSelecionada, comentario, prioridadeEscolhida!.toShortString());
+    widget.onSubmit(titulo, _dataSelecionada, comentario,
+        prioridadeEscolhida!.toShortString());
   }
 
   _showDatePicker() {
@@ -55,71 +54,77 @@ class _TarefaFormState extends State<TarefaForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: <Widget>[
-      TextField(
-        controller: _tarefaController,
-        decoration: InputDecoration(labelText: 'Tarefa'),
-      ),
-      TextField(
-        controller: _comentarioController,
-        decoration: InputDecoration(labelText: 'Comentário'),
-      ),
-      Text('Prioridade'),
-      ListTile(
-        title: const Text('Baixa'),
-        leading: Radio<Prioridade>(
-          value: Prioridade.baixa,
-          groupValue: prioridadeEscolhida,
-          onChanged: (Prioridade? value) {
-            setState(() {
-              prioridadeEscolhida = value;
-              print(prioridadeEscolhida!.toShortString());
-            });
-          },
-        ),
-      ),
-      ListTile(
-        title: const Text('Normal'),
-        leading: Radio<Prioridade>(
-          value: Prioridade.normal,
-          groupValue: prioridadeEscolhida,
-          onChanged: (Prioridade? value) {
-            setState(() {
-              prioridadeEscolhida = value;
-              print(prioridadeEscolhida);
-            });
-          },
-        ),
-      ),
-      ListTile(
-        title: const Text('Alta'),
-        leading: Radio<Prioridade>(
-          value: Prioridade.alta,
-          groupValue: prioridadeEscolhida,
-          onChanged: (Prioridade? value) {
-            setState(() {
-              prioridadeEscolhida = value;
-              print(prioridadeEscolhida);
-            });
-          },
-        ),
-      ),
-      Container(
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Text(
-                  'Data selecionada ${DateFormat('dd/MM/y').format(_dataSelecionada)}'),
+    return Center(
+      child: Container(
+        height: 414,
+        child: Column(children: <Widget>[
+          TextField(
+            controller: _tarefaController,
+            decoration: InputDecoration(labelText: 'Tarefa'),
+          ),
+          TextField(
+            controller: _comentarioController,
+            decoration: InputDecoration(labelText: 'Comentário'),
+          ),
+          Text('Prioridade'),
+          ListTile(
+            title: const Text('Baixa'),
+            leading: Radio<Prioridade>(
+              value: Prioridade.baixa,
+              groupValue: prioridadeEscolhida,
+              onChanged: (Prioridade? value) {
+                setState(() {
+                  prioridadeEscolhida = value;
+                  print(prioridadeEscolhida!.toShortString());
+                });
+              },
             ),
-            TextButton(
-                onPressed: _showDatePicker, child: Text('Selecionar data'))
-          ],
-        ),
+          ),
+          ListTile(
+            title: const Text('Normal'),
+            leading: Radio<Prioridade>(
+              value: Prioridade.normal,
+              groupValue: prioridadeEscolhida,
+              onChanged: (Prioridade? value) {
+                setState(() {
+                  prioridadeEscolhida = value;
+                  print(prioridadeEscolhida);
+                });
+              },
+            ),
+          ),
+          ListTile(
+            title: const Text('Alta'),
+            leading: Radio<Prioridade>(
+              value: Prioridade.alta,
+              groupValue: prioridadeEscolhida,
+              onChanged: (Prioridade? value) {
+                setState(() {
+                  prioridadeEscolhida = value;
+                  print(prioridadeEscolhida);
+                });
+              },
+            ),
+          ),
+          Container(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Text(
+                      'Data selecionada ${DateFormat('dd/MM/y').format(_dataSelecionada)}'),
+                ),
+                TextButton(
+                    onPressed: _showDatePicker, child: Text('Selecionar data'))
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ElevatedButton(
+                onPressed: _submitForm, child: Text('Confirmar')),
+          ),
+        ]),
       ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ElevatedButton(onPressed: _submitForm, child: Text('Confirmar')),
-      ),
-    ]);
+    );
   }
 }
