@@ -42,80 +42,84 @@ class _TarefaListaState extends State<TarefaLista> {
 
   @override
   Widget build(BuildContext context) {
-    return Scrollbar(
-      isAlwaysShown: true,
-      controller: _scrollController,
-      child: widget._tarefaLista.isEmpty == 0
-          ? Container(child: Text('Nenhuma tarefa cadastrada.'))
-          : SizedBox(
-              height: 200,
-              child: ListView.builder(
-                shrinkWrap: true,
-                controller: _scrollController,
-                itemCount: widget._tarefaLista.length,
-                itemBuilder: (context, index) {
-                  final tarefa = widget._tarefaLista[index];
-                  return Card(
-                    child: Row(
-                      children: [
-                        Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 2,
-                                  color: tarefa.data_execucao.day >=
-                                          DateTime.now().day
-                                      ? Theme.of(context).colorScheme.primary
-                                      : Colors.red),
-                            ),
-                            margin: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 10,
-                            ),
-                            padding: const EdgeInsets.all(5),
-                            child: Text(
-                                DateFormat('d MMM y')
-                                    .format(tarefa.data_execucao),
-                                style: TextStyle(
+    return Container(
+      child: widget._tarefaLista.isEmpty
+          ? Text('Nenhuma tarefa cadastrada')
+          : Scrollbar(
+              isAlwaysShown: true,
+              controller: _scrollController,
+              child: SizedBox(
+                height: 200,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  controller: _scrollController,
+                  itemCount: widget._tarefaLista.length,
+                  itemBuilder: (context, index) {
+                    final tarefa = widget._tarefaLista[index];
+                    return Card(
+                      child: Row(
+                        children: [
+                          Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 2,
                                     color: tarefa.data_execucao.day >=
                                             DateTime.now().day
                                         ? Theme.of(context).colorScheme.primary
-                                        : Colors.red))),
-                        Container(
-                            width: 65,
+                                        : Colors.red),
+                              ),
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 10,
+                              ),
+                              padding: const EdgeInsets.all(5),
+                              child: Text(
+                                  DateFormat('d MMM y')
+                                      .format(tarefa.data_execucao),
+                                  style: TextStyle(
+                                      color: tarefa.data_execucao.day >=
+                                              DateTime.now().day
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .primary
+                                          : Colors.red))),
+                          Container(
+                              width: 65,
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 10,
+                              ),
+                              padding: const EdgeInsets.all(5),
+                              child: Text(tarefa.titulo)),
+                          Container(
+                            width: 60,
+                            padding: const EdgeInsets.all(5),
                             margin: const EdgeInsets.symmetric(
-                              horizontal: 10,
+                              horizontal: 15,
                               vertical: 10,
                             ),
-                            padding: const EdgeInsets.all(5),
-                            child: Text(tarefa.titulo)),
-                        Container(
-                          width: 60,
-                          padding: const EdgeInsets.all(5),
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 15,
-                            vertical: 10,
+                            child: Text(tarefa.prioridade,
+                                style: TextStyle(
+                                    color: tarefa.prioridade == 'Normal'
+                                        ? Colors.purple
+                                        : (tarefa.prioridade == 'Baixa'
+                                            ? Colors.blue
+                                            : Colors.redAccent))),
                           ),
-                          child: Text(tarefa.prioridade,
-                              style: TextStyle(
-                                  color: tarefa.prioridade == 'Normal'
-                                      ? Colors.purple
-                                      : (tarefa.prioridade == 'Baixa'
-                                          ? Colors.blue
-                                          : Colors.redAccent))),
-                        ),
-                        Checkbox(
-                          fillColor:
-                              MaterialStateProperty.resolveWith(getColor),
-                          checkColor: Theme.of(context).colorScheme.primary,
-                          value: isChecked,
-                          onChanged: (bool? value) {
-                            _deleteTarefa(tarefa.id);
-                          },
-                        )
-                      ],
-                    ),
-                  );
-                },
+                          Checkbox(
+                            fillColor:
+                                MaterialStateProperty.resolveWith(getColor),
+                            checkColor: Theme.of(context).colorScheme.primary,
+                            value: isChecked,
+                            onChanged: (bool? value) {
+                              _deleteTarefa(tarefa.id);
+                            },
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
     );
