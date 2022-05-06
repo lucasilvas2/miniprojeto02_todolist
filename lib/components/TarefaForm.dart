@@ -56,54 +56,77 @@ class _TarefaFormState extends State<TarefaForm> {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: 414,
+        height: 270,
         child: Column(children: <Widget>[
-          TextField(
-            controller: _tarefaController,
-            decoration: InputDecoration(labelText: 'Tarefa'),
-          ),
-          TextField(
-            controller: _comentarioController,
-            decoration: InputDecoration(labelText: 'Comentário'),
-          ),
-          Text('Prioridade'),
-          ListTile(
-            title: const Text('Baixa'),
-            leading: Radio<Prioridade>(
-              value: Prioridade.baixa,
-              groupValue: prioridadeEscolhida,
-              onChanged: (Prioridade? value) {
-                setState(() {
-                  prioridadeEscolhida = value;
-                  print(prioridadeEscolhida!.toShortString());
-                });
-              },
+          SizedBox(
+            height: 40,
+            child: TextField(
+              controller: _tarefaController,
+              decoration: InputDecoration(labelText: 'Tarefa'),
             ),
           ),
-          ListTile(
-            title: const Text('Normal'),
-            leading: Radio<Prioridade>(
-              value: Prioridade.normal,
-              groupValue: prioridadeEscolhida,
-              onChanged: (Prioridade? value) {
-                setState(() {
-                  prioridadeEscolhida = value;
-                  print(prioridadeEscolhida);
-                });
-              },
+          SizedBox(
+            height: 40,
+            child: TextField(
+              controller: _comentarioController,
+              decoration: InputDecoration(labelText: 'Comentário'),
             ),
           ),
-          ListTile(
-            title: const Text('Alta'),
-            leading: Radio<Prioridade>(
-              value: Prioridade.alta,
-              groupValue: prioridadeEscolhida,
-              onChanged: (Prioridade? value) {
-                setState(() {
-                  prioridadeEscolhida = value;
-                  print(prioridadeEscolhida);
-                });
-              },
+          Container(
+              alignment: Alignment.centerLeft,
+              child: const Text(
+                'Prioridade',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                ),
+              )),
+          Container(
+            height: 25,
+            child: ListTile(
+              title: const Text('Baixa'),
+              leading: Radio<Prioridade>(
+                value: Prioridade.baixa,
+                groupValue: prioridadeEscolhida,
+                onChanged: (Prioridade? value) {
+                  setState(() {
+                    prioridadeEscolhida = value;
+                    print(prioridadeEscolhida!.toShortString());
+                  });
+                },
+              ),
+            ),
+          ),
+          Container(
+            height: 25,
+            child: ListTile(
+              title: const Text('Normal'),
+              leading: Radio<Prioridade>(
+                value: Prioridade.normal,
+                groupValue: prioridadeEscolhida,
+                onChanged: (Prioridade? value) {
+                  setState(() {
+                    prioridadeEscolhida = value;
+                    print(prioridadeEscolhida);
+                  });
+                },
+              ),
+            ),
+          ),
+          Container(
+            height: 25,
+            child: ListTile(
+              title: const Text('Alta'),
+              leading: Radio<Prioridade>(
+                value: Prioridade.alta,
+                groupValue: prioridadeEscolhida,
+                onChanged: (Prioridade? value) {
+                  setState(() {
+                    prioridadeEscolhida = value;
+                    print(prioridadeEscolhida);
+                  });
+                },
+              ),
             ),
           ),
           Container(
@@ -118,10 +141,13 @@ class _TarefaFormState extends State<TarefaForm> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-                onPressed: _submitForm, child: Text('Confirmar')),
+          Container(
+            height: 40,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                  onPressed: _submitForm, child: Text('Confirmar')),
+            ),
           ),
         ]),
       ),
