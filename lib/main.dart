@@ -51,27 +51,27 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<Tarefa> _tarefas = [
-    Tarefa(
-        id: 't0',
-        titulo: 'Estudar',
-        data_execucao: DateTime.now(),
-        data_criacao: DateTime.now(),
-        prioridade: 'Normal',
-        comentario: 'um'),
-    Tarefa(
-        id: 't1',
-        titulo: 'Jogar',
-        data_execucao: DateTime.now(),
-        data_criacao: DateTime.now(),
-        prioridade: 'Alta',
-        comentario: 'dois'),
-    Tarefa(
-        id: 't2',
-        titulo: 'Assistir',
-        data_execucao: DateTime.now().subtract(Duration(days: 2)),
-        data_criacao: DateTime.now(),
-        prioridade: 'Baixa',
-        comentario: 'três')
+    // Tarefa(
+    //     id: 't0',
+    //     titulo: 'Estudar',
+    //     data_execucao: DateTime.now(),
+    //     data_criacao: DateTime.now(),
+    //     prioridade: 'Normal',
+    //     comentario: 'um'),
+    // Tarefa(
+    //     id: 't1',
+    //     titulo: 'Jogar',
+    //     data_execucao: DateTime.now(),
+    //     data_criacao: DateTime.now(),
+    //     prioridade: 'Alta',
+    //     comentario: 'dois'),
+    // Tarefa(
+    //     id: 't2',
+    //     titulo: 'Assistir',
+    //     data_execucao: DateTime.now().subtract(Duration(days: 2)),
+    //     data_criacao: DateTime.now(),
+    //     prioridade: 'Baixa',
+    //     comentario: 'três')
   ];
 
   @override
