@@ -51,13 +51,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<Tarefa> _tarefas = [
-    // Tarefa(
-    //     id: 't0',
-    //     titulo: 'Estudar',
-    //     data_execucao: DateTime.now(),
-    //     data_criacao: DateTime.now(),
-    //     prioridade: 'Normal',
-    //     comentario: 'um'),
+    Tarefa(
+        id: 't0',
+        titulo: 'Estudar',
+        data_execucao: DateTime.now(),
+        data_criacao: DateTime.now(),
+        prioridade: 'Normal',
+        comentario: 'um'),
     // Tarefa(
     //     id: 't1',
     //     titulo: 'Jogar',
