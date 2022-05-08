@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-enum Prioridade { baixa, alta, normal }
+enum Prioridade { Baixa, Alta, Normal }
 
 extension ParseToString on Prioridade {
   String toShortString() {
@@ -50,7 +50,7 @@ class _TarefaFormState extends State<TarefaForm> {
     });
   }
 
-  Prioridade? prioridadeEscolhida = Prioridade.normal;
+  Prioridade? prioridadeEscolhida = Prioridade.Normal;
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +86,7 @@ class _TarefaFormState extends State<TarefaForm> {
             child: ListTile(
               title: const Text('Baixa'),
               leading: Radio<Prioridade>(
-                value: Prioridade.baixa,
+                value: Prioridade.Baixa,
                 groupValue: prioridadeEscolhida,
                 onChanged: (Prioridade? value) {
                   setState(() {
@@ -102,7 +102,7 @@ class _TarefaFormState extends State<TarefaForm> {
             child: ListTile(
               title: const Text('Normal'),
               leading: Radio<Prioridade>(
-                value: Prioridade.normal,
+                value: Prioridade.Normal,
                 groupValue: prioridadeEscolhida,
                 onChanged: (Prioridade? value) {
                   setState(() {
@@ -118,7 +118,7 @@ class _TarefaFormState extends State<TarefaForm> {
             child: ListTile(
               title: const Text('Alta'),
               leading: Radio<Prioridade>(
-                value: Prioridade.alta,
+                value: Prioridade.Alta,
                 groupValue: prioridadeEscolhida,
                 onChanged: (Prioridade? value) {
                   setState(() {

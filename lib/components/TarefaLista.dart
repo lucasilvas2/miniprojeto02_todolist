@@ -15,12 +15,45 @@ class TarefaLista extends StatefulWidget {
 
 class _TarefaListaState extends State<TarefaLista> {
   final ScrollController _scrollController = ScrollController();
-  final List<Tarefa> tarefaListafiltro = [];
+  final List<String> optFilterData = [];
+  List<Tarefa> _tarefaListaFiltro = [];
+
+  _filtroLista() {
+    _tarefaListaFiltro = [];
+    if (dropdownValue == 'Todas') {
+      setState(() {
+        _tarefaListaFiltro.addAll(widget._tarefaLista);
+      });
+    } else if (dropdownValue == 'Baixa') {
+      for (var i = 0; i < widget._tarefaLista.length; i++) {
+        if (widget._tarefaLista[i].prioridade == 'Baixa') {
+          setState(() {
+            _tarefaListaFiltro.add(widget._tarefaLista[i]);
+          });
+        }
+      }
+    } else if (dropdownValue == 'Normal') {
+      for (var i = 0; i < widget._tarefaLista.length; i++) {
+        if (widget._tarefaLista[i].prioridade == 'Normal') {
+          setState(() {
+            _tarefaListaFiltro.add(widget._tarefaLista[i]);
+          });
+        }
+      }
+    } else if (dropdownValue == 'Alta') {
+      for (var i = 0; i < widget._tarefaLista.length; i++) {
+        if (widget._tarefaLista[i].prioridade == 'Alta') {
+          setState(() {
+            _tarefaListaFiltro.add(widget._tarefaLista[i]);
+          });
+        }
+      }
+    }
+  }
 
   bool isChecked = false;
-  String? dropdownValue;
+  String dropdownValue = 'Todas';
   String? dropdownValueData;
-
 
   _deleteTarefa(value) {
     for (var i = 0; i < widget._tarefaLista.length; i++) {
@@ -46,6 +79,7 @@ class _TarefaListaState extends State<TarefaLista> {
 
   @override
   Widget build(BuildContext context) {
+    _filtroLista();
     return Container(
       child: widget._tarefaLista.isEmpty
           ? Text('Nenhuma tarefa cadastrada')
@@ -58,9 +92,7 @@ class _TarefaListaState extends State<TarefaLista> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          child: Text('Filtro:')
-                        ),
+                        Container(child: Text('Filtro:')),
                         Container(
                           child: DropdownButton(
                             value: dropdownValue,
@@ -71,9 +103,14 @@ class _TarefaListaState extends State<TarefaLista> {
                               setState(() {
                                 dropdownValue = newValue!;
                               });
+                              _filtroLista();
                             },
-                            items: <String>['Todas', 'Baixa', 'Normal', 'Alta',]
-                                .map<DropdownMenuItem<String>>((String value) {
+                            items: <String>[
+                              'Todas',
+                              'Baixa',
+                              'Normal',
+                              'Alta',
+                            ].map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
                                 child: Text(value),
@@ -91,10 +128,12 @@ class _TarefaListaState extends State<TarefaLista> {
                               setState(() {
                                 dropdownValueData = newValue!;
                                 print(DateFormat('d MMM y')
-                                            .format(widget._tarefaLista[0].data_execucao));
+                                    .format(
+                                        widget._tarefaLista[0].data_execucao)
+                                    .toString());
                               });
                             },
-                            items: <String>['Todas','01/02/22', '02/05/22', '03/05/12',]
+                            items: optFilterData
                                 .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
@@ -110,12 +149,15 @@ class _TarefaListaState extends State<TarefaLista> {
                     isAlwaysShown: true,
                     controller: _scrollController,
                     child: SizedBox(
+                      height: 150,
                       child: ListView.builder(
                         shrinkWrap: true,
                         controller: _scrollController,
-                        itemCount: widget._tarefaLista.length,
+                        //itemCount: widget._tarefaLista.length,
+                        itemCount: _tarefaListaFiltro.length,
                         itemBuilder: (context, index) {
-                          final tarefa = widget._tarefaLista[index];
+                          //final tarefa = widget._tarefaLista[index];
+                          final tarefa = _tarefaListaFiltro[index];
                           return Card(
                             child: Row(
                               children: [
