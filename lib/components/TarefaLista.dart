@@ -84,7 +84,7 @@ class _TarefaListaState extends State<TarefaLista> {
       child: widget._tarefaLista.isEmpty
           ? Text('Nenhuma tarefa cadastrada')
           : Container(
-              height: 200,
+              //height: 200,
               child: Column(
                 children: [
                   SizedBox(
@@ -149,7 +149,7 @@ class _TarefaListaState extends State<TarefaLista> {
                     isAlwaysShown: true,
                     controller: _scrollController,
                     child: SizedBox(
-                      height: 150,
+                      //height: 150,
                       child: ListView.builder(
                         shrinkWrap: true,
                         controller: _scrollController,
